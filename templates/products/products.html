@@ -1,0 +1,265 @@
+{% extends "base/base.html" %}
+
+{% block start %}
+<link rel="stylesheet" href="https://allyoucan.cloud/cdn/icofont/1.0.1/icofont.css" integrity="sha384-jbCTJB16Q17718YM9U22iJkhuGbS0Gd2LjaWb4YJEZToOPmnKDjySVa323U+W7Fv" crossorigin="anonymous">
+<link href="/media/css/products.css" rel="stylesheet" type="text/css" />
+{% load custom_filters %}
+
+<div class="container">
+<div class="row no-gutters">
+    <aside class="col-md-6">
+        <article class="gallery-wrap">
+            <div class="img-big-wrap">
+                <div>
+                    <a href="#"><img src="/media/{{product.product_images.first.image}}"></a>
+                </div>
+            </div>
+            <!-- slider-product.// -->
+            <div class="thumbs-wrap">
+                {% for image in product.product_images.all %}
+                    <a href="#" class="item-thumb"> <img src="/media/{{image.image}}"></a>
+                {% endfor %}
+            </div>
+            <!-- slider-nav.// -->
+        </article>
+        <!-- gallery-wrap .end// -->
+    </aside>
+    <main class="col-md-6 border-left">
+        <article class="content-body">
+
+            <h2 class="title">{{product.product_name}}</h2>
+
+            <div class="rating-wrap my-3">
+                <ul class="rating-stars">
+                    <li style="width:80%" class="stars-active">
+                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </li>
+                    <li>
+                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </li>
+                </ul>
+                <small class="label-rating text-muted">132 reviews</small>
+                <small class="label-rating text-success"> <i class="fa fa-clipboard-check"></i> 154 orders </small>
+            </div>
+            <!-- rating-wrap.// -->
+
+            <div class="mb-3">
+                <var class="price h4">Rs
+                    {% if updated_price %}
+                        {{updated_price}}
+                    {% else %}
+                        {{product.price}}
+                    {% endif %}
+
+                </var>
+                <span class="text-muted">/per kg</span>
+            </div>
+            <!-- price-detail-wrap .// -->
+
+            <p>{{product.product_description}}</p>
+
+            <dl class="row">
+                <dt class="col-sm-3">Model#</dt>
+                <dd class="col-sm-9">Odsy-1000</dd>
+
+                <dt class="col-sm-3">Color</dt>
+                <dd class="col-sm-9">Brown</dd>
+
+                <dt class="col-sm-3">Delivery</dt>
+                <dd class="col-sm-9">Russia, USA, and Europe </dd>
+            </dl>
+
+            <hr>
+            <div class="form-row">
+                <div class="form-group col-md flex-grow-0">
+                    <label>Quantity</label>
+                    <div class="input-group mb-3 input-spinner">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-light" type="button" id="button-plus" fdprocessedid="tgzaj9"> + </button>
+                        </div>
+                        <input type="text" class="form-control" value="1" fdprocessedid="96dh0e">
+                        <div class="input-group-append">
+                            <button class="btn btn-light" type="button" id="button-minus" fdprocessedid="2ufmik"> − </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- col.// -->
+                {% if product.size_variant.count %}
+                <div class="form-group col-md">
+                    <label>Select size</label>
+                    <div class="mt-1">
+                        {% for size in product.size_variant.all %}
+                        <label class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" onchange="get_correct_price('{{size.size_name}}')" name="select_size" 
+                  {% if selected_size == size.size_name%}
+                    checked 
+                {% endif %}
+                  class="custom-control-input">
+                  <div class="custom-control-label">{{size}}</div>
+                </label>
+                        {%endfor%}
+                 </div>
+                </div>
+                {% endif %}
+                <!-- col.// -->
+            </div>
+            <!-- row.// -->
+
+            <a href="#" class="btn  btn-primary"> Buy now </a>
+            <a href={% url 'add_to_cart' product.uid %}?variant={{selected_size}} class="btn  btn-outline-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i> </a>
+        </article>
+        <!-- product-info-aside .// -->      
+        <!-- Add a new review form -->
+      </div>
+    </main>
+    <!-- col.// -->
+</div>
+
+</div>
+<div class="container">
+    <div class="col-md-12">
+        <div class="offer-dedicated-body-left">
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade active show" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">
+                    <div class="bg-white rounded shadow-sm p-4 mb-4 clearfix graph-star-rating">
+                        <h5 class="mb-0 mb-4">Ratings and Reviews</h5>
+                        <div class="graph-star-rating-header">
+                            <p class="text-black mb-4 mt-2">Rated 3.5 out of 5</p>
+                        </div>
+                        <div class="graph-star-rating-body">
+                            <div class="rating-list">
+                                <div class="rating-list-left text-black">
+                                    5 Star
+                                </div>
+                                <div class="rating-list-center">
+                                    <div class="progress">
+                                        <div style="width: 56%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                                            <span class="sr-only">80% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rating-list-right text-black">56%</div>
+                            </div>
+                            <div class="rating-list">
+                                <div class="rating-list-left text-black">
+                                    4 Star
+                                </div>
+                                <div class="rating-list-center">
+                                    <div class="progress">
+                                        <div style="width: 23%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                                            <span class="sr-only">80% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rating-list-right text-black">23%</div>
+                            </div>
+                            <div class="rating-list">
+                                <div class="rating-list-left text-black">
+                                    3 Star
+                                </div>
+                                <div class="rating-list-center">
+                                    <div class="progress">
+                                        <div style="width: 11%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                                            <span class="sr-only">80% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rating-list-right text-black">11%</div>
+                            </div>
+                            <div class="rating-list">
+                                <div class="rating-list-left text-black">
+                                    2 Star
+                                </div>
+                                <div class="rating-list-center">
+                                    <div class="progress">
+                                        <div style="width: 2%" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                                            <span class="sr-only">80% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rating-list-right text-black">02%</div>
+                            </div>
+                        </div>
+                        <div class="graph-star-rating-footer text-center mt-3 mb-3">
+                            <button type="button" class="btn btn-outline-primary btn-sm">Rate and Review</button>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded shadow-sm p-4 mb-4 restaurant-detailed-ratings-and-reviews">
+                        {% comment %} <a href="#" class="btn btn-outline-primary btn-sm float-right">Top Rated</a> {% endcomment %}
+                        <h5 class="mb-1">All Ratings and Reviews</h5>
+                        {% for review in reviews %}
+                        <div class="reviews-members pt-4 pb-4">
+                            <div class="media">
+                                {% if request.user.profile.profile_image %}
+                                    <img alt="Generic placeholder image" src="/media/{{request.user.profile.profile_image}}" class="mr-3 rounded-pill">
+                                {% else %}
+                                    <img alt="Generic placeholder image" src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mr-3 rounded-pill">
+                                {% endif %}
+                                <div class="media-body">
+                                    <div class="reviews-members-header">
+                                        <h6 class="text-black mb-1">{{review.name}} 
+                                            <div class="star-rating">
+                                                {% for i in review.rating|get_star_range %}
+                                                    {% if i < 5 %}
+                                                        ⭐
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </h6>
+                                        <strong class="text-gray">{{review.created_at}}</strong>
+                                    </div>
+                                    <br>
+                                    <div class="reviews-members-body">
+                                        <p>{{review.message_review}}</p>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <hr>
+                        <a class="text-center w-100 d-block mt-4 font-weight-bold" href="#">See All Reviews</a>
+                    </div>
+                    <div class="bg-white rounded shadow-sm p-4 mb-5 rating-review-select-page">
+                        <h5 class="mb-4">Leave Comment/Rating for {{product.product_name}}</h5>
+                        
+                        
+                        <form method="post">
+                            {% csrf_token %}
+                            {% include 'base/alert.html' %}
+                            <div class="form-group">
+                                <label for="rating" class="mb-2">Rating</label>
+                                <select name="rating" required class="form-control form-control-lg col-md-3">
+                                    <option value="1">⭐⭐⭐⭐⭐</option>
+                                    <option value="2">⭐⭐⭐⭐</option>
+                                    <option value="3">⭐⭐⭐</option>
+                                    <option value="4">⭐⭐</option>
+                                    <option value="5">⭐</option>
+                                </select><br>
+                                <label>Your Comment</label>
+                                <!-- Add the name attribute to the textarea -->
+                                <textarea name="message_review" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit"> Submit Comment </button>
+                            </div>
+                        </form>
+                        
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<script>
+    function get_correct_price(size){
+        window.location.href = window.location.pathname + `?size=${size}`
+    }
+</script>
+
+{% endblock %}

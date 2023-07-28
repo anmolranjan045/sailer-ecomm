@@ -1,0 +1,221 @@
+a:hover {
+    text-decoration: none;
+}
+
+.widget.single-news {
+    margin-bottom: 20px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.widget.single-news:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.row-wrapper {
+    margin-top: 20px;
+}
+
+.widget.single-news .image img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+
+.widget.single-news .image .gradient {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgeG1sbnM9Imh0d…IxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjbGVzc2hhdC1nZW5lcmF0ZWQpIiAvPjwvc3ZnPg==);
+    background-image: -webkit-linear-gradient(bottom, #000000 0%, rgba(0, 0, 0, 0.05) 100%);
+    background-image: -moz-linear-gradient(bottom, #000000 0%, rgba(0, 0, 0, 0.05) 100%);
+    background-image: -o-linear-gradient(bottom, #000000 0%, rgba(0, 0, 0, 0.05) 100%);
+    background-image: linear-gradient(to top, #000000 0%, rgba(0, 0, 0, 0.05) 100%);
+}
+
+.widget.single-news .details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.widget.single-news .details .category {
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.widget.single-news .details .category a {
+    color: #fff;
+    zoom: 1;
+    -webkit-opacity: 0.8;
+    -moz-opacity: 0.8;
+    opacity: 0.8;
+    -ms-filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=80);
+    filter: alpha(opacity=80);
+}
+
+.widget.single-news .details h3 {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    font-size: 19px;
+}
+
+.widget.single-news .details h3 a {
+    color: #fff;
+    zoom: 1;
+    -webkit-opacity: 0.8;
+    -moz-opacity: 0.8;
+    opacity: 0.8;
+    -ms-filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=80);
+    filter: alpha(opacity=80);
+}
+
+.widget.single-news .details:hover time {
+    position: relative;
+    display: block;
+    color: #fff;
+    font-size: 13px;
+    margin-bottom: -20px;
+    -webkit-transition: all 350ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    -moz-transition: all 350ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    -o-transition: all 350ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    transition: all 350ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    zoom: 1;
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    opacity: 0;
+    -ms-filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: alpha(opacity=0);
+}
+
+.copy-code-btn {
+    position: absolute;
+    top: 10px;
+    /* Adjust the top value to position the button vertically */
+    left: 10px;
+    /* Adjust the left value to position the button horizontally */
+    z-index: 1;
+    /* To ensure the button appears above the image */
+    background-color: #fff;
+    /* Button background color */
+    padding: 5px 10px;
+    /* Button padding */
+    border: none;
+    /* Remove button border */
+    border-radius: 5px;
+    /* Rounded button corners */
+    cursor: pointer;
+    /* Show hand cursor on hover */
+    font-size: 14px;
+}
+
+.widget.single-news .image:hover .copy-code-btn {
+    display: block;
+}
+
+.widget.single-news .image {
+    position: relative;
+}
+
+.widget.single-news .image img {
+    display: block;
+    width: 100%;
+}
+
+
+/* Additional CSS for the "Copy Code" button */
+
+.copy-code-btn {
+    display: none;
+}
+
+.copy-code-btn:hover {
+    background-color: #e1e1e1;
+}
+
+
+/* Add the following CSS to the existing styles */
+
+
+/* To create a gap between the cards */
+
+.row-wrapper {
+    margin-top: 20px;
+}
+
+
+/* To display the cards next to each other */
+
+.row .col-sm-4 {
+    float: left;
+    width: 33.33%;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+
+/* To clear the float and prevent container collapse */
+
+.row::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* Set a fixed height for the card container */
+
+.widget.single-news {
+    height: 250px;
+}
+
+
+/* Background image for the card container */
+
+.widget.single-news .image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 100%;
+    /* Make the image cover the entire card */
+    position: relative;
+}
+
+
+/* Additional styling for the "Copy Code" button */
+
+.copy-code-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+    background-color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: none;
+}
+
+.image:hover .copy-code-btn {
+    display: block;
+}
+
+
+/* Add shadow when hovering over the cards */
+
+.widget.single-news:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}

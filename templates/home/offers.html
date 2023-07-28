@@ -1,0 +1,55 @@
+{% extends "base/base.html" %}
+
+{% block start %}
+
+<link href="/media/css/offers.css" rel="stylesheet" type="text/css" />
+
+<div class="container bootstrap snippets bootdey">
+    <div class="row-wrapper">
+        {% include 'base/alert.html' %}
+        <div class="row">
+            {% for coupon in coupons %}
+                <div class="col-sm-4">
+                    <div class="widget single-news">
+                        <div class="image" style="background-image: url('/media/{{coupon.coupon_image}}');">
+                            <button class="copy-code-btn" data-code="{{coupon.coupon_code}}">Copy Code</button>
+                            <span class="gradient"></span>
+                        </div>
+                        <div class="details">
+                            <!-- Card content -->
+                            <div class="category">Minimum Buy: {{coupon.minimum_amount}}</div>
+                            <h3><a href="#">{{coupon.coupon_code}}</a></h3>
+                            <time>Expiry: {{coupon.expiry_date}}</time>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const copyCodeButtons = document.querySelectorAll(".copy-code-btn");
+
+    copyCodeButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        const codeToCopy = this.getAttribute("data-code");
+        copyToClipboard(codeToCopy);
+      });
+    });
+
+    function copyToClipboard(text) {
+      const dummyTextArea = document.createElement("textarea");
+      dummyTextArea.value = text;
+      document.body.appendChild(dummyTextArea);
+      dummyTextArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummyTextArea);
+    }
+  });
+</script>
+
+
+{% endblock %}
